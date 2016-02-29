@@ -3,10 +3,29 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	<constant name="struts.i18n.encoding" value="utf-8"></constant>
-	<package name="default" namespace="/" extends="struts-default">
-		<action name="demo" class="demo">
-			<result name="success">index.jsp</result>
+	<!-- 指定web应用的默认编码为UTF-8，功能等同于request.setCharacterEncoding() -->
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <!-- 指定struts2的请求处理后缀，匹配*.action的所有请求 -->
+    <constant name="struts.action.extension" value="action"/>
+    <!-- 关闭struts2的!动态方法调用,建议使用通配符匹配方式实现动态方法调用 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+    <!-- 设置浏览器是否缓存静态页面，默认为true，建议：开发阶段关闭，生产环境打开 -->
+    <constant name="struts.serve.static.browserCache" value="false" />
+    <!-- 当struts.xml修改时自动重新加载，默认为false。建议：开发阶段打开，生产环境关闭 -->
+    <constant name="struts.configuration.xml.reload" value="true"/>
+    <!-- 开发模式下打开，便于打印详细日志，生产环境下关闭 -->
+    <constant name="struts.devMode" value="true" />
+     <!-- struts文件上传大小限制(字节)，默认为2M-->
+    <constant name="struts.multipart.maxSize" value="50485760" />
+    <!-- 设置视图主题为css_xhtml -->
+    <constant name="struts.ui.theme" value="simple" />
+    <!-- 指定struts中action交由spring创建 -->
+    <constant name="struts.objectFactory" value="spring"/>
+    
+	<package name="login" namespace="/login" extends="struts-default">
+		<action name="*" class="UserAction" method="{1}">
+			<result name="index" type="redirect">index.jsp</result>
+			<result name="login">login.jsp</result>
 		</action>
 	</package>
 </struts>

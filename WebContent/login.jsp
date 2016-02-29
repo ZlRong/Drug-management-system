@@ -12,17 +12,17 @@
 <body class="uk-height-1-1">
 	<div class="uk-vertical-align uk-text-center uk-height-1-1">
 		<div class="uk-vertical-align-middle" style="width: 250px;">
-			<form class="uk-panel uk-panel-box uk-form">
+			<form class="uk-panel uk-panel-box uk-form" action="login/login.action" method="post">
 		<fieldset id="">
 			<legend><label class="uk-h1">登录</label></legend>
 			<div class="uk-form-row">
-				<input class="uk-width-1-1 uk-form-large" type="text" name="username" placeholder="用户名" />			
+				<input class="uk-width-1-1 uk-form-large" type="text" name="vo.username" placeholder="用户名" />			
 			</div>
 			<div class="uk-form-row">
-				<input class="uk-width-1-1 uk-form-large" type="password" name="password" placeholder="密码" />			
+				<input class="uk-width-1-1 uk-form-large" type="password" name="vo.password" placeholder="密码" />			
 			</div>	
 			<div class="uk-form-row">
-				<a class="uk-width-1-3 uk-button uk-button-primary uk-button-large" href="#">登陆</a>
+				<a class="uk-width-1-3 uk-button uk-button-primary uk-button-large" href="#">登录</a>
 				<a class="uk-width-1-3 uk-button uk-button-large" href="#">注册</a>
 			</div>
 		</fieldset>
