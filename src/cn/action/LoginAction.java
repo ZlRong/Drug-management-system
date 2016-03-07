@@ -32,6 +32,15 @@ public class LoginAction extends ActionSupport {
 	public void setService(UserService service) {
 		this.service = service;
 	}
+	
+	public void add(){
+		UserLogin userLogin = new UserLogin();
+		userLogin.setNumber("1001");
+		userLogin.setUsername("admin");
+		userLogin.setPassword("admin");
+		service.add(userLogin);
+		System.out.println("success.");
+	}
 
 	public String login(){
 		UserLogin userLogin = service.login(vo);

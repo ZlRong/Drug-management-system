@@ -23,8 +23,8 @@
     <constant name="struts.objectFactory" value="spring"/>
     
 	<package name="login" namespace="/login" extends="struts-default">
-		<action name="*" class="UserAction" method="{1}">
-			<result name="index" type="redirect">index.jsp</result>
+		<action name="*" class="LoginAction" method="{1}">
+			<result name="index">/WEB-INF/index.jsp</result>
 			<result name="login">login.jsp</result>
 		</action>
 	</package>
