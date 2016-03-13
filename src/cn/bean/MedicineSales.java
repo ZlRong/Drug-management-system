@@ -5,6 +5,10 @@ import java.util.Date;
 
 public class MedicineSales implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3016701986155265462L;
 	private Long id;
 	/**
 	 * 库存id
@@ -26,6 +30,7 @@ public class MedicineSales implements Serializable{
 	 * 销售批号
 	 */
 	private String saleBatchNumber;
+	
 	public Long getId() {
 		return id;
 	}

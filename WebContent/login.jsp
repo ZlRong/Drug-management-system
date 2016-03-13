@@ -5,9 +5,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>登录</title>
-	<link rel="stylesheet" type="text/css" href="css/uikit.almost-flat.min.css"/>
-	<script src="js/jquery-2.0.0.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/uikit.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="/dms/css/uikit.almost-flat.min.css"/>
+	<script src="/dms/js/jquery-2.0.0.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/dms/js/uikit.min.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		var submitform = function (){
 			$("#loginForm").submit();

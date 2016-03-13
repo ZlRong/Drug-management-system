@@ -9,6 +9,10 @@ import java.io.Serializable;
  */
 public class MedicineInfo implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6822105731905619631L;
 	private Long id;
 	/**
 	 * 批准文号

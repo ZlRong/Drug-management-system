@@ -6,8 +6,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>药品管理系统</title>
 	<link rel="stylesheet" href="../css/uikit.almost-flat.min.css" />
-    <script src="../js/uikit.min.js"></script>
     <script src="../js/jquery-2.0.0.min.js"></script>
+    <script src="../js/uikit.min.js"></script>
     <script src="../js/components/pagination.min.js"></script>
 </head>
 <body>

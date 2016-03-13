@@ -21,11 +21,52 @@
     <constant name="struts.ui.theme" value="simple" />
     <!-- 指定struts中action交由spring创建 -->
     <constant name="struts.objectFactory" value="spring"/>
-    
-	<package name="login" namespace="/login" extends="struts-default">
+    <package name="base" extends="struts-default">
+    	<global-results>
+    		<result name="login" type="redirect">/login.jsp</result>
+    	</global-results>
+    </package>
+    <package name="base_login" extends="base">
+    	<interceptors>
+    		<interceptor name="loginStack" class="cn.interceptor.LoginInterceptor"></interceptor>
+    		<interceptor-stack name="loginStacks">
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    			<interceptor-ref name="loginStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	<default-interceptor-ref name="loginStacks"></default-interceptor-ref>
+    </package>
+	<package name="login" namespace="/login" extends="base">
 		<action name="*" class="LoginAction" method="{1}">
+			<result name="index" type="redirect">/index.action</result>
+			<result name="changepassword">/WEB-INF/user/changepassword.jsp</result>
+		</action>
+	</package>
+	<package name="index" extends="base_login,json-default">
+		<action name="index" class="MedicineInfoAction" method="query">
 			<result name="index">/WEB-INF/index.jsp</result>
-			<result name="login">login.jsp</result>
+    		<interceptor-ref name="loginStacks"/>
+		</action>
+		<action name="query" class="MedicineInfoAction" method="ajaxQuery">
+			<result name="ajaxquery" type="json"></result>
+		</action>
+	</package>
+	<package name="medicineinfo" namespace="/medicineinfo" extends="base_login">
+		<action name="*" class="MedicineInfoAction" method="{1}">
+			<result name="detail">/WEB-INF/medicineinfo/detail.jsp</result>
+    		<interceptor-ref name="loginStacks"/>
+		</action>
+	</package>
+	<package name="medicinestorehouse" namespace="/medicinestorehouse" extends="base_login">
+		<action name="*" class="MedicineStorehouseAction" method="{1}">
+			<result name="query">/WEB-INF/medicinestorehouse/query.jsp</result>
+    		<interceptor-ref name="loginStacks"/>
+		</action>
+	</package>
+	<package name="medicinesales" namespace="/medicinesales" extends="base_login">
+		<action name="*" class="MedicineSalesAction" method="{1}">
+			<result name="query">/WEB-INF/medicinesales/query.jsp</result>
+    		<interceptor-ref name="loginStacks"/>
 		</action>
 	</package>
 </struts>

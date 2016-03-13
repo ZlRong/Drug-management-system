@@ -9,15 +9,19 @@ import java.util.Date;
  */
 public class MedicineStorehouse implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2948732049225663038L;
 	private Long id;
 	/**
 	 * 药品信息id
 	 */
-	private String medicineId;
+	private Long medicineId;
 	/**
 	 * 生产日期
 	 */
-	private String mfg;
+	private Date mfg;
 	/**
 	 * 保质期
 	 */
@@ -35,22 +39,25 @@ public class MedicineStorehouse implements Serializable{
 	 */
 	private Long purchaseId;
 	
+	//额外
+	private String medicineName;	//药品名称
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getMedicineId() {
+	public Long getMedicineId() {
 		return medicineId;
 	}
-	public void setMedicineId(String medicineId) {
+	public void setMedicineId(Long medicineId) {
 		this.medicineId = medicineId;
 	}
-	public String getMfg() {
+	public Date getMfg() {
 		return mfg;
 	}
-	public void setMfg(String mfg) {
+	public void setMfg(Date mfg) {
 		this.mfg = mfg;
 	}
 	public Date getExp() {
@@ -76,6 +83,12 @@ public class MedicineStorehouse implements Serializable{
 	}
 	public void setPurchaseId(Long purchaseId) {
 		this.purchaseId = purchaseId;
+	}
+	public String getMedicineName() {
+		return medicineName;
+	}
+	public void setMedicineName(String medicineName) {
+		this.medicineName = medicineName;
 	}
 	
 	
