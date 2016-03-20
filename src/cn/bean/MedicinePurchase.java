@@ -41,6 +41,10 @@ public class MedicinePurchase implements Serializable{
 	 */
 	private Long userId;
 	
+	//自定义
+	private String name;
+	private String licenseNumber;
+	private String medicineName;
 	public Long getId() {
 		return id;
 	}
@@ -82,6 +86,24 @@ public class MedicinePurchase implements Serializable{
 	}
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getLicenseNumber() {
+		return licenseNumber;
+	}
+	public void setLicenseNumber(String licenseNumber) {
+		this.licenseNumber = licenseNumber;
+	}
+	public String getMedicineName() {
+		return medicineName;
+	}
+	public void setMedicineName(String medicineName) {
+		this.medicineName = medicineName;
 	}
 	
 	

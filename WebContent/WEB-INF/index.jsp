@@ -37,10 +37,11 @@
 	<div id="pageHead">
 		<nav class="uk-navbar">
 			<ul class="uk-navbar-nav">
-				<li class="uk-active"><a class="uk-button" href="#" >首页</a></li>
+				<li class="uk-active"><a class="uk-button" href="/dms/index.action" >首页</a></li>
+				<li><a class="uk-button" href="/dms/user/query.action">员工管理</a></li>
 				<li><a class="uk-button" href="/dms/medicinestorehouse/query.action">库存管理</a></li>
-				<li><a class="uk-button" href="">药品采购</a></li>
-				<li><a class="uk-button" href="">药品销售</a></li>
+				<li><a class="uk-button" href="/dms/medicinepurchase/query.action">药品采购</a></li>
+				<li><a class="uk-button" href="/dms/medicinesales/query.action">药品销售</a></li>
 				<li><a class="uk-button" href="">药品统计</a></li>
 			</ul>
 			<div class="uk-navbar-flip uk-navbar-content uk-hidden-small">
@@ -53,7 +54,9 @@
 			</div>
 		</nav>
 	</div>
-	
+	<div id="pageBtn">
+		<a class="uk-button uk-button-primary" href="/dms/medicineinfo/toAdd.action">添加</a>
+	</div>
 	<div id="pageBody">
 		<table class="uk-text-center uk-table uk-table-striped uk-table-hover">
 			<thead>

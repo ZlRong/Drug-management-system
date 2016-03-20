@@ -42,18 +42,18 @@
 			<result name="changepassword">/WEB-INF/user/changepassword.jsp</result>
 		</action>
 	</package>
-	<package name="index" extends="base_login,json-default">
+	<package name="index" extends="base_login">
 		<action name="index" class="MedicineInfoAction" method="query">
 			<result name="index">/WEB-INF/index.jsp</result>
     		<interceptor-ref name="loginStacks"/>
 		</action>
-		<action name="query" class="MedicineInfoAction" method="ajaxQuery">
-			<result name="ajaxquery" type="json"></result>
-		</action>
 	</package>
-	<package name="medicineinfo" namespace="/medicineinfo" extends="base_login">
+	<package name="medicineinfo" namespace="/medicineinfo" extends="base_login,json-default">
 		<action name="*" class="MedicineInfoAction" method="{1}">
 			<result name="detail">/WEB-INF/medicineinfo/detail.jsp</result>
+			<result name="index" type="redirect">/index.action</result>
+			<result name="add">/WEB-INF/medicineinfo/add.jsp</result>
+			<result name="ajaxquery" type="json"></result>
     		<interceptor-ref name="loginStacks"/>
 		</action>
 	</package>
@@ -67,6 +67,29 @@
 		<action name="*" class="MedicineSalesAction" method="{1}">
 			<result name="query">/WEB-INF/medicinesales/query.jsp</result>
     		<interceptor-ref name="loginStacks"/>
+		</action>
+	</package>
+	<package name="medicinepurchase" namespace="/medicinepurchase" extends="base_login">
+		<action name="*" class="MedicinePurchaseAction" method="{1}">
+			<result name="query">/WEB-INF/medicinepurchase/query.jsp</result>
+			<result name="add">/WEB-INF/medicinepurchase/add.jsp</result>
+			<result name="detail">/WEB-INF/medicinepurchase/detail.jsp</result>
+    		<interceptor-ref name="loginStacks"/>
+		</action>
+	</package>
+	<package name="userinfo" namespace="/user" extends="base_login">
+		<action name="*" class="UserInfoAction" method="{1}">
+			<result name="query">/WEB-INF/user/query.jsp</result>
+			<result name="requery" type="redirect">/user/query.action</result>
+			<result name="edit">/WEB-INF/user/edit.jsp</result>
+			<result name="add">/WEB-INF/user/add.jsp</result>
+			<result name="detail">/WEB-INF/user/detail.jsp</result>
+    		<interceptor-ref name="loginStacks"/>
+		</action>
+	</package>
+	<package name="ajaxautocomplete" namespace="/ajaxautocomplete" extends="base_login,json-default">
+		<action name="*" class="AjaxAutocompleteAction" method="{1}">
+			<result name="medicineinfo" type="json"></result>
 		</action>
 	</package>
 </struts>
