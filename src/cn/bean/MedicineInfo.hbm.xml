@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.bean">
+	<class name="MedicineInfo" table="medicine_info">
+		<id name="id" column="id" type="long">
+			<generator class="identity"></generator>
+		</id>
+		<property name="licenseNumber" column="license_number" type="string" length="50" />
+		<property name="medicineName" column="medicine_name" type="string" length="100" />
+		<property name="medicineENName" column="medicine_en_name" type="string" length="100" />
+		<property name="productName" column="product_name" type="string" length="20" />
+		<property name="dosageForm" column="dosage_form" type="string" length="20" />
+		<property name="spec" column="spec" type="string" length="200" />
+		<property name="productionUnit" column="production_unit" type="string" length="20" />
+		<property name="productionAddress" column="production_address" type="string" length="20" />
+		<property name="medicineType" column="medicine_type" type="string" length="20" />
+		<property name="originalLicenseNumber" column="original_license_number" type="string" length="20" />
+		<property name="licenseDate" column="license_date" type="string" length="20" />
+		<property name="drugStandardCode" column="drug_standard_code" type="string" length="200" />
+		<property name="drugStandardCodeRemark" column="drug_standard_code_remark" type="string" length="300" />
+	</class>
+</hibernate-mapping>

@@ -5,11 +5,11 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>药品管理系统</title>
-	<link rel="stylesheet" href="css/uikit.almost-flat.min.css" />
-    <script src="js/jquery-2.0.0.min.js"></script>
-    <script src="js/uikit.min.js"></script>
-    <script src="js/components/pagination.min.js"></script>
+	<title>药品库存管理系统</title>
+	<link rel="stylesheet" href="/dms/css/uikit.almost-flat.min.css" />
+    <script src="/dms/js/jquery-2.0.0.min.js"></script>
+    <script src="/dms/js/uikit.min.js"></script>
+    <script src="/dms/js/components/pagination.min.js"></script>
     <script type="text/javascript">
     	$(function(){
     		$('[data-uk-pagination]').on('select.uk.pagination', function(e, pageIndex){
@@ -18,7 +18,7 @@
     		
     		$('a[tid]').on('click',function(){
     			var s = $(this).attr('tid');
-    			window.iframedetail.location.href='medicineinfo/detail.action?vo.id='+s;
+    			window.iframedetail.location.href='/dms/medicineinfo/detail.action?vo.id='+s;
     		})
     	});
     	$('#modaldetail').on({
@@ -37,9 +37,9 @@
 	<div id="pageHead">
 		<nav class="uk-navbar">
 			<ul class="uk-navbar-nav">
-				<li class="uk-active"><a class="uk-button" href="/dms/index.action" >首页</a></li>
+				<li><a class="uk-button" href="/dms/index.action" >首页</a></li>
 				<li><a class="uk-button" href="/dms/user/query.action">员工管理</a></li>
-				<li><a class="uk-button" href="/dms/medicinestorehouse/query.action">库存管理</a></li>
+				<li class="uk-active"><a class="uk-button" href="/dms/medicinestorehouse/query.action">库存管理</a></li>
 				<li><a class="uk-button" href="/dms/medicinepurchase/query.action">药品采购</a></li>
 				<li><a class="uk-button" href="/dms/medicinesales/query.action">药品销售</a></li>
 				<li><a class="uk-button" href="/dms/medicinestatistics/query.action">药品统计</a></li>
@@ -54,26 +54,26 @@
 			</div>
 		</nav>
 	</div>
-	<div id="pageBtn">
-		<a class="uk-button uk-button-primary" href="/dms/medicineinfo/toAdd.action">添加</a>
-	</div>
+	
 	<div id="pageBody">
 		<table class="uk-text-center uk-table uk-table-striped uk-table-hover">
 			<thead>
 				<tr>
 					<th class="uk-text-center">药品名称</th>
-					<th class="uk-text-center">批准文号</th>
-					<th class="uk-text-center">生产单位</th>
-					<th class="uk-text-center">药品本位码</th>
+					<th class="uk-text-center">生产日期</th>
+					<th class="uk-text-center">保质期</th>
+					<th class="uk-text-center">库存</th>
+					<th class="uk-text-center">售价</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="u" items="${query}">
 					<tr>
-							<td><a tid="${u.id}" class="uk-button uk-button-link" href="#modaldetail" data-uk-modal="{target:'#modaldetail'}">${u.medicineName }</a></td>
-							<td>${u.licenseNumber }</td>
-							<td>${u.productionUnit }</td>
-							<td>${u.drugStandardCode }</td>
+							<td><a tid="${u.medicineId}" class="uk-button uk-button-link" href="#modaldetail" data-uk-modal="{target:'#modaldetail'}">${u.medicineName }</a></td>
+							<td>${u.mfg }</td>
+							<td>${u.exp }</td>
+							<td>${u.number }</td>
+							<td>${u.price }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

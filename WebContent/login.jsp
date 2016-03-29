@@ -4,15 +4,11 @@
 <html class="uk-height-1-1">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>登录</title>
+	<title>药品管理系统登录</title>
 	<link rel="stylesheet" type="text/css" href="/dms/css/uikit.almost-flat.min.css"/>
 	<script src="/dms/js/jquery-2.0.0.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/dms/js/uikit.min.js" type="text/javascript" charset="utf-8"></script>
-	<script>
-		var submitform = function (){
-			$("#loginForm").submit();
-		}
-	</script>
+
 </head>
 <body class="uk-height-1-1">
 	<div class="uk-vertical-align uk-text-center uk-height-1-1">
@@ -27,8 +23,8 @@
 				<input class="uk-width-1-1 uk-form-large" type="password" id="password" name="vo.password" placeholder="密码" />			
 			</div>	
 			<div class="uk-form-row">
-				<a class="uk-width-1-3 uk-button uk-button-primary uk-button-large" href="javascript:submitform()">登录</a>
-				<a class="uk-width-1-3 uk-button uk-button-large" href="#">注册</a>
+				<button class="uk-width-2-3 uk-button uk-button-large uk-button-primary">确定</button>
+				
 			</div>
 		</fieldset>
 	</form>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.bean">
+	<class name="MedicinePurchase" table="medicine_purchase">
+		<id name="id" column="id" type="long">
+			<generator class="identity"></generator>
+		</id>
+		<property name="medicineId" column="medicine_id" type="long" />
+		<property name="costPrice" column="cost_price" type="double" />
+		<property name="number" column="number" type="int" />
+		<property name="purchaseDate" column="purchase_date" type="date" />
+		<property name="batchNumber" column="batch_number" type="string" length="20" />
+		<property name="userId" column="user_id" type="long" />
+	</class>
+</hibernate-mapping>
