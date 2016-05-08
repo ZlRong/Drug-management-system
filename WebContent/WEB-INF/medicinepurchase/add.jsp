@@ -37,11 +37,22 @@
 
 		    <fieldset data-uk-margin>
 		        <legend>采购药品</legend>
-				<div class="uk-width-1-3">
-					<label class="uk-form-label">产品名称</label>
-					<input type="text">
-				</div>
-				<label class="uk-form-label"></label>
+				<table id="tb_purchase">
+					<thead>
+						<tr>
+							<th>药品id</th>
+							<th>成本</th>
+							<th>数量</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+					</tbody>
+				</table>
 				
 				<button class="uk-button uk-button-large uk-button-primary">确定</button>
 		    </fieldset>
