@@ -8,26 +8,41 @@
 	<link rel="stylesheet" type="text/css" href="/dms/css/uikit.almost-flat.min.css"/>
 	<script src="/dms/js/jquery-2.0.0.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/dms/js/uikit.min.js" type="text/javascript" charset="utf-8"></script>
-
+	<script type="text/javascript">
+	$(function(){
+		var error = '${error}';
+		if(error!=''){
+			$('#error').text(error);
+			var modal = UIkit.modal("#modalerror");
+			modal.show();
+		}
+	});
+	</script>
 </head>
-<body class="uk-height-1-1">
+<body class="uk-height-1-1"  style="background-image: url('/dms/images/medicine.jpg'); background-repeat: no-repeat; background-size:100%;">
 	<div class="uk-vertical-align uk-text-center uk-height-1-1">
 		<div class="uk-vertical-align-middle" style="width: 250px;">
 			<form id="loginForm" class="uk-panel uk-panel-box uk-form" action="login/login.action" method="post">
-		<fieldset id="">
-			<legend><label class="uk-h1">登录</label></legend>
-			<div class="uk-form-row">
-				<input class="uk-width-1-1 uk-form-large" type="text" id="username" name="vo.username" placeholder="用户名" />			
-			</div>
-			<div class="uk-form-row">
-				<input class="uk-width-1-1 uk-form-large" type="password" id="password" name="vo.password" placeholder="密码" />			
-			</div>	
-			<div class="uk-form-row">
-				<button class="uk-width-2-3 uk-button uk-button-large uk-button-primary">确定</button>
-				
-			</div>
-		</fieldset>
-	</form>
+				<fieldset id="">
+					<legend><label class="uk-h1">登录</label></legend>
+					<div class="uk-form-row">
+						<input class="uk-width-1-1 uk-form-large" type="text" id="username" name="vo.username" placeholder="用户名" />			
+					</div>
+					<div class="uk-form-row">
+						<input class="uk-width-1-1 uk-form-large" type="password" id="password" name="vo.password" placeholder="密码" />			
+					</div>	
+					<div class="uk-form-row">
+						<button class="uk-width-2-3 uk-button uk-button-large uk-button-primary">确定</button>
+						
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<div id="modalerror" class="uk-modal">
+		<div class="uk-modal-dialog uk-modal-dialog-large">
+			<a class="uk-modal-close uk-close"></a>
+			<div id="error"></div>
 		</div>
 	</div>
 </body>

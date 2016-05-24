@@ -23,7 +23,7 @@ public class MedicineStorehouse implements Serializable{
 	 */
 	private Date mfg;
 	/**
-	 * 保质期
+	 * 过期日期
 	 */
 	private Date exp;
 	/**
@@ -41,6 +41,11 @@ public class MedicineStorehouse implements Serializable{
 	
 	//额外
 	private String medicineName;	//药品名称
+	
+	private double costPrice;		//成本
+	
+	private String status;			//状态
+	
 	
 	public Long getId() {
 		return id;
@@ -89,6 +94,18 @@ public class MedicineStorehouse implements Serializable{
 	}
 	public void setMedicineName(String medicineName) {
 		this.medicineName = medicineName;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public double getCostPrice() {
+		return costPrice;
+	}
+	public void setCostPrice(double costPrice) {
+		this.costPrice = costPrice;
 	}
 	
 	

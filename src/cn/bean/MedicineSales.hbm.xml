@@ -12,5 +12,6 @@
 		<property name="saleNumber" column="sale_number" type="int" />
 		<property name="saleDate" column="sale_date" type="date" length="20" />
 		<property name="saleBatchNumber" column="sale_batch_number" type="string" length="20" />
+		<property name="userId" column="user_id" type="long" />
 	</class>
 </hibernate-mapping>

@@ -39,4 +39,13 @@ public class UserDao extends HibernateDaoSupport{
 		UserLogin ul = (UserLogin)query.uniqueResult();
 		return ul;
 	}
+	
+	public UserLogin queryByNumber(UserLogin vo) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = "from UserLogin where number = ?";
+		Query query = session.createQuery(hql);
+		query.setString(0, vo.getNumber().trim());
+		UserLogin ul = (UserLogin)query.uniqueResult();
+		return ul;
+	}
 }

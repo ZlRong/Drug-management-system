@@ -6,10 +6,18 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>药品管理系统</title>
 	<link rel="stylesheet" href="/dms/css/uikit.almost-flat.min.css" />
-	<link rel="stylesheet" type="text/css" href="/dms/css/components/autocomplete.almost-flat.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/dms/css/components/datepicker.css"/>
     <script src="/dms/js/jquery-2.0.0.min.js"></script>
     <script src="/dms/js/uikit.min.js"></script>
-    <script src="/dms/js/components/autocomplete.min.js"></script>
+    <script src="/dms/js/components/datepicker.js"></script>
+    <script>
+		$(function(){
+			$("#addpurchase").on('click',function(){
+	    		var tb = $("#tb_purchase tbody");
+	    		tb.append('<tr><td><input type="text" name="drugStandardCode"></td><td><input type="text" name="costPrice"></td><td><input type="text" name="number"></td><td><input type="text" name="mfg" data-uk-datepicker="{format:&#39;YYYY-MM-DD&#39;}"></td><td><input type="text" name="exp" data-uk-datepicker="{format:&#39;YYYY-MM-DD&#39;}"></td></tr>');
+			});
+		});
+    </script>
 </head>
 <body>
 	<div id="pageHead">
@@ -23,7 +31,7 @@
 			</ul>
 			<div class="uk-navbar-flip uk-navbar-content uk-hidden-small">
 		
-				<div class="uk-display-inline">欢迎${user.name}</div>
+				<div class="uk-display-inline">欢迎&nbsp;${user.job}&nbsp;|&nbsp;${user.name}&nbsp;</div>
 				<div class="uk-button-group">
 					<a class="uk-button uk-button-primary" href="/dms/login/toChangePassword.action">修改密码</a>
 					<a class="uk-button uk-button-danger" href="/dms/login/logout.action">注销</a>
@@ -31,8 +39,10 @@
 			</div>
 		</nav>
 	</div>
-	
-	<div id="pageBody">
+	<div id="pageBtn">
+		<a id="addpurchase" class="uk-button uk-button-primary">添加</a>
+	</div>
+	<div id="pageBody" class='uk-panel uk-panel-box uk-margin uk-margin-left uk-margin-right'>
 		<form class="uk-form uk-form-horizontal" action="/dms/medicinepurchase/add.action" method="post">
 
 		    <fieldset data-uk-margin>
@@ -40,16 +50,20 @@
 				<table id="tb_purchase">
 					<thead>
 						<tr>
-							<th>药品id</th>
+							<th>药品本位码</th>
 							<th>成本</th>
 							<th>数量</th>
+							<th>生产日期</th>
+							<th>过期日期</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><input type="text" name=""></td>
-							<td><input type="text" name=""></td>
-							<td><input type="text" name=""></td>
+							<td><input type="text" name="drugStandardCode"></td>
+							<td><input type="text" name="costPrice"></td>
+							<td><input type="text" name="number"></td>
+							<td><input type="text" name="mfg" data-uk-datepicker="{format:'YYYY-MM-DD'}"></td>
+							<td><input type="text" name="exp" data-uk-datepicker="{format:'YYYY-MM-DD'}"></td>
 						</tr>
 					</tbody>
 				</table>

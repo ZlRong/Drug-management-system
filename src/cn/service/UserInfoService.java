@@ -13,4 +13,6 @@ public interface UserInfoService extends BaseService{
 	public UserInfo queryById(UserInfo vo);
 
 	public void add(UserInfo vo, UserLogin login);
+	
+	public String JSONQuery(UserInfo vo, PageResult page);
 }

@@ -1,9 +1,13 @@
 package cn.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -14,6 +18,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import cn.bean.UserInfo;
 import cn.bean.UserLogin;
 import cn.service.UserInfoService;
+import cn.service.UserService;
 import cn.util.Constants;
 import cn.util.PageResult;
 
@@ -25,6 +30,9 @@ public class UserInfoAction extends ActionSupport {
 	
 	@Resource(name = "UserInfoServiceImpl")
 	private UserInfoService service;
+	@Resource(name = "UserServiceImpl")
+	private UserService loginService;
+	
 	private UserInfo vo = new UserInfo();
 	private UserLogin login = new UserLogin();
 	private PageResult page = new PageResult();
@@ -76,6 +84,20 @@ public class UserInfoAction extends ActionSupport {
 		return "query";
 	}
 	
+	public void JSONQuery(){
+		String list = service.JSONQuery(vo, page);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");
+		try {
+			PrintWriter  out = response.getWriter();
+			out.write(list);
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public String toAdd(){
 		return "add";
 	}
@@ -96,6 +118,15 @@ public class UserInfoAction extends ActionSupport {
 		service.update(vo);
 		ActionContext.getContext().put(Constants.EDIT, vo);
 		return "edit";
+	}
+	
+	public String delete(){
+		UserLogin ul = new UserLogin();
+		ul.setNumber(vo.getNumber());
+		ul = loginService.queryByNumber(ul);
+		service.del(vo);
+		loginService.del(ul);
+		return query();
 	}
 	
 	public String detail(){

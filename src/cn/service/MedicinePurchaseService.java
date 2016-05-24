@@ -11,6 +11,7 @@ public interface MedicinePurchaseService extends BaseService{
 	
 	public List<MedicinePurchase> queryInfo(MedicinePurchase vo,PageResult page);
 	
+	public String JSONQuery(MedicinePurchase vo,PageResult page);
 
 	public List<MedicinePurchase> queryByBatchNumber(MedicinePurchase vo,PageResult page);
 	

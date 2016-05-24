@@ -9,5 +9,13 @@ public interface MedicineStorehouseService extends BaseService{
 
 	public List<MedicineStorehouse> query(MedicineStorehouse vo,PageResult page);
 	
+	public String JSONQuery(MedicineStorehouse vo,PageResult page);
+	
 	public MedicineStorehouse queryById(MedicineStorehouse info);
+	
+	public List<MedicineStorehouse> queryExpired(MedicineStorehouse vo,PageResult page);
+	
+	List<MedicineStorehouse> queryNotExpired(MedicineStorehouse vo,PageResult page);
+
+	public boolean dealWith(MedicineStorehouse vo);
 }

@@ -12,4 +12,6 @@ public interface MedicineInfoService extends BaseService{
 	public MedicineInfo queryById(MedicineInfo info);
 
 	public List<MedicineInfo> queryFuzzy(String search);
+	
+	public List<MedicineInfo> queryByDrugStandardCode(String drugStandardCode);
 }

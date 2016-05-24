@@ -24,7 +24,7 @@
 			</ul>
 			<div class="uk-navbar-flip uk-navbar-content uk-hidden-small">
 		
-				<div class="uk-display-inline">欢迎${user.name}</div>
+				<div class="uk-display-inline">欢迎&nbsp;${user.job}&nbsp;|&nbsp;${user.name}&nbsp;</div>
 				<div class="uk-button-group">
 					<a class="uk-button uk-button-primary" href="/dms/login/toChangePassword.action">修改密码</a>
 					<a class="uk-button uk-button-danger" href="/dms/login/logout.action">注销</a>
@@ -35,7 +35,6 @@
 	
 	<div id="pageBody">
 		<form class="uk-form uk-form-horizontal" action="/dms/user/add.action" method="post">
-
 		    <fieldset data-uk-margin>
 		        <legend>添加新员工</legend>
 		        <div class="uk-text-center uk-width-1-1">
@@ -57,7 +56,6 @@
 					</div>
 				</div>
 		    </fieldset>
-
 		</form>
 	</div>
 </body>

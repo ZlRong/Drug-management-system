@@ -13,13 +13,40 @@
     <script type="text/javascript">
     	$(function(){
     		$('[data-uk-pagination]').on('select.uk.pagination', function(e, pageIndex){
-    	        alert('You have selected page: ' + (pageIndex+1));
+    	        $.ajax({
+    	        	'url':'http://localhost:8081/dms/user/JSONQuery.action',
+    	        	'type':'post',
+    	        	'data':{
+    	        		'page.currentPage':pageIndex+1
+    	        	},
+    	        	'dataType':'json',
+    	        	'success':function(data){
+    	        		$('#tb-body').empty();
+    	        		for(var i = 0;i<data.length;i++){
+    	        			var row = '<tr><td><a tid="'+data[i].id+'" class="uk-button uk-button-link" href="#modaldetail" data-uk-modal="{target:\'#modaldetail\'}">'+data[i].name+'</a></td><td>'+data[i].number+'</td><td>'+data[i].address+'</td><td>'+data[i].phone+'</td><td>'+data[i].job+'</td><td><a z-data="'+data[i].id+'" n-data="'+data[i].number+'" class="uk-button uk-button-danger del" href="#">删除</a></td></tr>';
+    	        			$('#tb-body').append(row);
+    	        		}
+    	        		
+    	        		$('a[tid]').on('click',function(){
+    	        			var s = $(this).attr('tid');
+    	        			window.iframedetail.location.href='/dms/user/toEdit.action?vo.id='+s;
+    	        		});
+    	        	}
+    	        });
     	    });
     		
     		$('a[tid]').on('click',function(){
     			var s = $(this).attr('tid');
     			window.iframedetail.location.href='/dms/user/toEdit.action?vo.id='+s;
-    		})
+    		});
+    		
+    		$('.del').click(function(){
+    			var s = $(this).attr('z-data');
+    			var n = $(this).attr('n-data');
+    			UIkit.modal.confirm("确定要删除吗?", function(){
+    			    window.location.href='/dms/user/delete.action?vo.id='+s+'&vo.number='+n;
+    			});
+    		});
     	});
     	$('#modaldetail').on({
 
@@ -46,7 +73,7 @@
 			</ul>
 			<div class="uk-navbar-flip uk-navbar-content uk-hidden-small">
 		
-				<div class="uk-display-inline">欢迎${user.name}</div>
+				<div class="uk-display-inline">欢迎&nbsp;${user.job}&nbsp;|&nbsp;${user.name}&nbsp;</div>
 				<div class="uk-button-group">
 					<a class="uk-button uk-button-primary" href="/dms/login/toChangePassword.action">修改密码</a>
 					<a class="uk-button uk-button-danger" href="/dms/login/logout.action">注销</a>
@@ -57,7 +84,7 @@
 	<div id="pageBtn">
 		<a class="uk-button uk-button-primary" href="/dms/user/toAdd.action">添加</a>
 	</div>
-	<div id="pageBody">
+	<div id="pageBody" class='uk-panel uk-panel-box uk-margin-left uk-margin-right uk-margin'>
 		<table class="uk-text-center uk-table uk-table-striped uk-table-hover">
 			<thead>
 				<tr>
@@ -66,9 +93,10 @@
 					<th class="uk-text-center">地址</th>
 					<th class="uk-text-center">联系方式</th>
 					<th class="uk-text-center">职业</th>
+					<th class="uk-text-center">操作</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="tb-body">
 				<c:forEach var="u" items="${query}">
 					<tr>
 							<td><a tid="${u.id}" class="uk-button uk-button-link" href="#modaldetail" data-uk-modal="{target:'#modaldetail'}">${u.name }</a></td>
@@ -76,6 +104,7 @@
 							<td>${u.address }</td>
 							<td>${u.phone }</td>
 							<td>${u.job }</td>
+							<td><a z-data='${u.id }' n-data='${u.number }' class="uk-button uk-button-danger del" href="#">删除</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

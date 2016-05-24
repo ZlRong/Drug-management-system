@@ -35,8 +35,5 @@
 			</tbody>
 		</table>
 	</div>
-	<div id="pagination">
-		<ul class="uk-pagination" data-uk-pagination="{items:${page.items}, itemsOnPage:${page.itemsOnPage}, currentPage:${page.currentPage}-1}"></ul>
-	</div>
 </body>
 </html>

@@ -85,4 +85,14 @@ public class MedicineInfoDao extends HibernateDaoSupport{
 		query.setMaxResults(10);
 		return query.list();
 	}
+	
+	public List<MedicineInfo> queryByDrugStandardCode(String drugStandardCode) {
+		Session session = this.getSessionFactory().getCurrentSession();
+		StringBuffer hql = new StringBuffer();
+		hql.append("from MedicineInfo");
+		hql.append(" where drugStandardCode like :search");
+		Query query = session.createQuery(hql.toString());
+		query.setString("search", "%"+drugStandardCode+"%");
+		return query.list();
+	}
 }

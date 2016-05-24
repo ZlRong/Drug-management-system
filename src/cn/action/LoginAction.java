@@ -83,10 +83,13 @@ public class LoginAction extends ActionSupport {
 			u.setNumber(userLogin.getNumber());
 			UserInfo user = userInfoService.query(u,null).get(0);
 			userLogin.setName(user.getName());
+			userLogin.setJob(user.getJob());
+			ActionContext.getContext().getSession().put("userinfo", user);
 			ActionContext.getContext().getSession().put(Constants.USER, userLogin);
 			return "index";
 		}
 		else{
+			ActionContext.getContext().put(Constants.ERROR, "用户名不存在或密码错误。");
 			return "login";
 		}
 	}

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 import cn.bean.UserInfo;
 import cn.bean.UserLogin;
 import cn.dao.UserDao;
@@ -69,5 +72,23 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public void add(UserInfo vo,UserLogin login){
 		dao.add(vo);
 		loginDao.add(login);
+	}
+
+	@Override
+	public String JSONQuery(UserInfo vo, PageResult page) {
+		List<UserInfo> users = dao.query(vo, page);
+		JSONArray ja = new JSONArray();
+		JSONObject jo = null;
+		for(UserInfo u :users){
+			jo = new JSONObject();
+			jo.put("id", u.getId());
+			jo.put("number", u.getNumber());
+			jo.put("name", u.getName());
+			jo.put("phone", u.getPhone());
+			jo.put("address", u.getAddress());
+			jo.put("job", u.getJob());
+			ja.add(jo);
+		}
+		return ja.toJSONString();
 	}
 }

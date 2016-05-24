@@ -58,4 +58,8 @@ public class MedicineInfoServiceImpl implements MedicineInfoService {
 		return dao.queryFuzzy(search);
 	}
 
+	@Override
+	public List<MedicineInfo> queryByDrugStandardCode(String drugStandardCode) {
+		return dao.queryByDrugStandardCode(drugStandardCode);
+	}
 }

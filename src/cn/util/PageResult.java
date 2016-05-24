@@ -3,7 +3,7 @@ package cn.util;
 public class PageResult {
 	
 	private int items;			//总记录数
-	private int itemsOnPage = 20;	//每页记录数
+	private int itemsOnPage = 6;	//每页记录数
 	private int currentPage = 1;	//当前页
 	
 	public int getItems() {

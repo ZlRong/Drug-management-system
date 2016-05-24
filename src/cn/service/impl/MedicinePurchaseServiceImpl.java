@@ -1,6 +1,7 @@
 package cn.service.impl;
 
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +11,9 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import cn.bean.MedicinePurchase;
 import cn.dao.MedicinePurchaseDao;
@@ -119,6 +123,26 @@ public class MedicinePurchaseServiceImpl implements MedicinePurchaseService {
 			list.add(m);
 		}
 		return list;
+	}
+
+	@Override
+	public String JSONQuery(MedicinePurchase vo, PageResult page) {
+		List<Object> objList= dao.query(vo,page);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		JSONArray ja = new JSONArray();
+		JSONObject jo = null;
+		for(Object obj:objList){
+			jo = new JSONObject();
+			Object[] o = (Object[])obj;
+			String batchNumber = (String)o[0];
+			Date purchaseDate = (Date)o[1];
+			String name = (String)o[2];
+			jo.put("batchNumber", batchNumber);
+			jo.put("purchaseDate", sdf.format(purchaseDate));
+			jo.put("name", name);
+			ja.add(jo);
+		}
+		return ja.toJSONString();
 	}
 
 }

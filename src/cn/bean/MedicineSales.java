@@ -30,7 +30,21 @@ public class MedicineSales implements Serializable{
 	 * 销售批号
 	 */
 	private String saleBatchNumber;
+	/**
+	 * 用户id
+	 */
+	private Long userId;
 	
+	private String name;	//用户名
+	private String licenseNumber;
+	private String medicineName;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -66,6 +80,24 @@ public class MedicineSales implements Serializable{
 	}
 	public void setSaleBatchNumber(String saleBatchNumber) {
 		this.saleBatchNumber = saleBatchNumber;
+	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public String getLicenseNumber() {
+		return licenseNumber;
+	}
+	public void setLicenseNumber(String licenseNumber) {
+		this.licenseNumber = licenseNumber;
+	}
+	public String getMedicineName() {
+		return medicineName;
+	}
+	public void setMedicineName(String medicineName) {
+		this.medicineName = medicineName;
 	}
 	
 }

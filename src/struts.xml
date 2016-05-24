@@ -24,6 +24,7 @@
     <package name="base" extends="struts-default">
     	<global-results>
     		<result name="login" type="redirect">/login.jsp</result>
+			<result name="nopermission">/nopermission.jsp</result>
     	</global-results>
     </package>
     <package name="base_login" extends="base">
@@ -39,6 +40,7 @@
 	<package name="login" namespace="/login" extends="base">
 		<action name="*" class="LoginAction" method="{1}">
 			<result name="index" type="redirect">/index.action</result>
+			<result name="login">/login.jsp</result>
 			<result name="changepassword">/WEB-INF/user/changepassword.jsp</result>
 		</action>
 	</package>
@@ -49,35 +51,96 @@
 		</action>
 	</package>
 	<package name="medicineinfo" namespace="/medicineinfo" extends="base_login,json-default">
+		<interceptors>
+    		<interceptor name="medicineInfoStack" class="cn.interceptor.MedicineInfoInterceptor"></interceptor>
+    		<interceptor-stack name="medicineInfoStacks">
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    			<interceptor-ref name="medicineInfoStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	<action name="query" class="MedicineInfoAction" method="query">
+			<result name="index" type="redirect">/index.action</result>
+    	</action>
 		<action name="*" class="MedicineInfoAction" method="{1}">
 			<result name="detail">/WEB-INF/medicineinfo/detail.jsp</result>
 			<result name="index" type="redirect">/index.action</result>
 			<result name="add">/WEB-INF/medicineinfo/add.jsp</result>
+			<result name="edit">/WEB-INF/medicineinfo/edit.jsp</result>
 			<result name="ajaxquery" type="json"></result>
     		<interceptor-ref name="loginStacks"/>
+			<interceptor-ref name="medicineInfoStacks" />
 		</action>
 	</package>
 	<package name="medicinestorehouse" namespace="/medicinestorehouse" extends="base_login">
+		<interceptors>
+    		<interceptor name="medicineStorehouseStack" class="cn.interceptor.MedicineStorehouseInterceptor"></interceptor>
+    		<interceptor-stack name="medicineStorehouseStacks">
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    			<interceptor-ref name="medicineStorehouseStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	<action name="query" class="MedicineStorehouseAction" method="query">
+			<result name="query">/WEB-INF/medicinestorehouse/query.jsp</result>
+    		<interceptor-ref name="loginStacks"/>
+    	</action>
 		<action name="*" class="MedicineStorehouseAction" method="{1}">
 			<result name="query">/WEB-INF/medicinestorehouse/query.jsp</result>
     		<interceptor-ref name="loginStacks"/>
+    		<interceptor-ref name="medicineStorehouseStacks" />
 		</action>
 	</package>
 	<package name="medicinesales" namespace="/medicinesales" extends="base_login">
-		<action name="*" class="MedicineSalesAction" method="{1}">
+		<interceptors>
+    		<interceptor name="medicineSalesStack" class="cn.interceptor.MedicineSalesInterceptor"></interceptor>
+    		<interceptor-stack name="medicineSalesStacks">
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    			<interceptor-ref name="medicineSalesStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	<action name="query" class="MedicineSalesAction" method="query">
 			<result name="query">/WEB-INF/medicinesales/query.jsp</result>
     		<interceptor-ref name="loginStacks"/>
+    	</action>
+		<action name="*" class="MedicineSalesAction" method="{1}">
+			<result name="query">/WEB-INF/medicinesales/query.jsp</result>
+			<result name="add">/WEB-INF/medicinesales/add.jsp</result>
+			<result name="detail">/WEB-INF/medicinesales/detail.jsp</result>
+    		<interceptor-ref name="loginStacks"/>
+    		<interceptor-ref name="medicineSalesStacks"/>
 		</action>
 	</package>
 	<package name="medicinepurchase" namespace="/medicinepurchase" extends="base_login">
+		<interceptors>
+    		<interceptor name="medicinePurchaseStack" class="cn.interceptor.MedicinePurchaseInterceptor"></interceptor>
+    		<interceptor-stack name="medicinePurchaseStacks">
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    			<interceptor-ref name="medicinePurchaseStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	<action name="query" class="MedicinePurchaseAction" method="query">
+			<result name="query">/WEB-INF/medicinepurchase/query.jsp</result>
+    		<interceptor-ref name="loginStacks"/>
+    	</action>
 		<action name="*" class="MedicinePurchaseAction" method="{1}">
 			<result name="query">/WEB-INF/medicinepurchase/query.jsp</result>
 			<result name="add">/WEB-INF/medicinepurchase/add.jsp</result>
 			<result name="detail">/WEB-INF/medicinepurchase/detail.jsp</result>
     		<interceptor-ref name="loginStacks"/>
+    		<interceptor-ref name="medicinePurchaseStacks"/>
 		</action>
 	</package>
 	<package name="userinfo" namespace="/user" extends="base_login">
+		<interceptors>
+    		<interceptor name="userInfoStack" class="cn.interceptor.UserInfoInterceptor"></interceptor>
+    		<interceptor-stack name="userInfoStacks">
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    			<interceptor-ref name="userInfoStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	<action name="query" class="UserInfoAction" method="query">
+			<result name="query">/WEB-INF/user/query.jsp</result>
+    		<interceptor-ref name="loginStacks"/>
+    	</action>
 		<action name="*" class="UserInfoAction" method="{1}">
 			<result name="query">/WEB-INF/user/query.jsp</result>
 			<result name="requery" type="redirect">/user/query.action</result>
@@ -85,11 +148,26 @@
 			<result name="add">/WEB-INF/user/add.jsp</result>
 			<result name="detail">/WEB-INF/user/detail.jsp</result>
     		<interceptor-ref name="loginStacks"/>
+    		<interceptor-ref name="userInfoStacks"/>
+		</action>
+	</package>
+		<package name="medicinestatistics" namespace="/medicinestatistics" extends="base_login">
+		<action name="*" class="MedicineStatisticsAction" method="{1}">
+			<result name="query">/WEB-INF/medicinestatistics/query.jsp</result>
+    		<interceptor-ref name="loginStacks"/>
 		</action>
 	</package>
 	<package name="ajaxautocomplete" namespace="/ajaxautocomplete" extends="base_login,json-default">
 		<action name="*" class="AjaxAutocompleteAction" method="{1}">
 			<result name="medicineinfo" type="json"></result>
+		</action>
+	</package>
+	<package name="chart" namespace="/chart" extends="base_login,jfreechart-default">
+		<action name="*" class="BarChartAction" method="{1}">
+			<result name="chart" type="chart">
+			    <param name="width">600</param>
+			    <param name="height">450</param>
+			</result>
 		</action>
 	</package>
 </struts>

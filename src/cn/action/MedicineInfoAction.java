@@ -70,8 +70,24 @@ public class MedicineInfoAction extends ActionSupport {
 		return "add";
 	}
 	
+	public String toEdit(){
+		vo = service.queryById(vo);
+		ActionContext.getContext().put("vo", vo);
+		return "edit";
+	}
+	
 	public String add(){
 		service.add(vo);
+		return "index";
+	}
+	
+	public String edit(){
+		service.update(vo);
+		return "index";
+	}
+	
+	public String delete(){
+		service.del(vo);
 		return "index";
 	}
 	

@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>药品库存管理系统</title>
+	<title>药品采购系统</title>
 	<link rel="stylesheet" href="/dms/css/uikit.almost-flat.min.css" />
     <script src="/dms/js/jquery-2.0.0.min.js"></script>
     <script src="/dms/js/uikit.min.js"></script>
@@ -13,7 +13,31 @@
     <script type="text/javascript">
     	$(function(){
     		$('[data-uk-pagination]').on('select.uk.pagination', function(e, pageIndex){
-    	        alert('You have selected page: ' + (pageIndex+1));
+    			$.ajax({
+    	        	'url':'http://localhost:8081/dms/medicinepurchase/JSONQuery.action',
+    	        	'type':'post',
+    	        	'data':{
+    	        		'page.currentPage':pageIndex+1
+    	        	},
+    	        	'dataType':'json',
+    	        	'success':function(data){
+    	        		$('#tb-body').empty();
+    	        		for(var i = 0;i<data.length;i++){
+    	        			var row = '';
+        	        		row = row +'<tr>'; 
+    	        			row = row +'<td><a tid="'+data[i].batchNumber+'" class="uk-button uk-button-link" href="#modaldetail" data-uk-modal="{target:\'#modaldetail\'}">'+data[i].batchNumber+'</a></td>';
+    	        			row = row +'<td>'+data[i].purchaseDate+'</td>';
+    	        			row = row +'<td>'+data[i].name+'</td>';
+    	        			row = row +'</tr>';
+    	        			$('#tb-body').append(row);
+    	        		}
+
+	        			$('a[tid]').on('click',function(){
+	            			var s = $(this).attr('tid');
+	            			window.iframedetail.location.href='/dms/medicinepurchase/detail.action?vo.batchNumber='+s;
+	            		});
+    	        	}
+    	        });
     	    });
     		
     		$('a[tid]').on('click',function(){
@@ -46,7 +70,7 @@
 			</ul>
 			<div class="uk-navbar-flip uk-navbar-content uk-hidden-small">
 		
-				<div class="uk-display-inline">欢迎${user.name}</div>
+				<div class="uk-display-inline">欢迎&nbsp;${user.job}&nbsp;|&nbsp;${user.name}&nbsp;</div>
 				<div class="uk-button-group">
 					<a class="uk-button uk-button-primary" href="/dms/login/toChangePassword.action">修改密码</a>
 					<a class="uk-button uk-button-danger" href="/dms/login/logout.action">注销</a>
@@ -66,7 +90,7 @@
 					<th class="uk-text-center">用户</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="tb-body">
 				<c:forEach var="u" items="${query}">
 					<tr>
 						<td><a tid="${u.batchNumber}" class="uk-button uk-button-link" href="#modaldetail" data-uk-modal="{target:'#modaldetail'}">${u.batchNumber }</a></td>

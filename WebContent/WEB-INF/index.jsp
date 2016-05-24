@@ -16,11 +16,26 @@
     	        alert('You have selected page: ' + (pageIndex+1));
     	    });
     		
+    		$('.del').click(function(){
+    			var s = $(this).attr('z-data');
+    			UIkit.modal.confirm("确定要删除吗?", function(){
+    			    window.location.href='/dms/medicineinfo/delete.action?vo.id='+s;
+    			});
+    		});
+    		
     		$('a[tid]').on('click',function(){
     			var s = $(this).attr('tid');
     			window.iframedetail.location.href='medicineinfo/detail.action?vo.id='+s;
-    		})
+    		});
+    		
+    		var msg = '${msg}';
+    		if(msg!=''){
+    			$('#msg').text(msg);
+    			var modal = UIkit.modal("#modalmsg");
+    			modal.show();
+    		};
     	});
+    	
     	$('#modaldetail').on({
 
     	    'show.uk.modal': function(){
@@ -46,7 +61,7 @@
 			</ul>
 			<div class="uk-navbar-flip uk-navbar-content uk-hidden-small">
 		
-				<div class="uk-display-inline">欢迎${user.name}</div>
+				<div class="uk-display-inline">欢迎&nbsp;${user.job}&nbsp;|&nbsp;${user.name}&nbsp;</div>
 				<div class="uk-button-group">
 					<a class="uk-button uk-button-primary" href="/dms/login/toChangePassword.action">修改密码</a>
 					<a class="uk-button uk-button-danger" href="/dms/login/logout.action">注销</a>
@@ -57,7 +72,7 @@
 	<div id="pageBtn">
 		<a class="uk-button uk-button-primary" href="/dms/medicineinfo/toAdd.action">添加</a>
 	</div>
-	<div id="pageBody">
+	<div id="pageBody" class='uk-panel uk-panel-box uk-margin-left uk-margin-right uk-margin'>
 		<table class="uk-text-center uk-table uk-table-striped uk-table-hover">
 			<thead>
 				<tr>
@@ -65,6 +80,7 @@
 					<th class="uk-text-center">批准文号</th>
 					<th class="uk-text-center">生产单位</th>
 					<th class="uk-text-center">药品本位码</th>
+					<th class="uk-text-center">操&nbsp;&nbsp;&nbsp;&nbsp;作</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -74,6 +90,10 @@
 							<td>${u.licenseNumber }</td>
 							<td>${u.productionUnit }</td>
 							<td>${u.drugStandardCode }</td>
+							<td>
+								<a class="uk-button" href="/dms/medicineinfo/toEdit.action?vo.id=${u.id }">修改</a>
+								<a z-data='${u.id }' class="uk-button uk-button-danger del" href="#">删除</a>
+							</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -86,6 +106,12 @@
 		<div class="uk-modal-dialog uk-modal-dialog-large">
 			<a class="uk-modal-close uk-close"></a>
 			<iframe frameborder="0" name="iframedetail" width="1100px" height="450px"></iframe>
+		</div>
+	</div>
+	<div id="modalmsg" class="uk-modal">
+		<div class="uk-modal-dialog uk-modal-dialog-large">
+			<a class="uk-modal-close uk-close"></a>
+			<div id="msg"></div>
 		</div>
 	</div>
 </body>
