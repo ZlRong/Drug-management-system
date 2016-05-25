@@ -13,7 +13,43 @@
     <script type="text/javascript">
     	$(function(){
     		$('[data-uk-pagination]').on('select.uk.pagination', function(e, pageIndex){
-    	        alert('You have selected page: ' + (pageIndex+1));
+    			$.ajax({
+    	        	'url':'http://localhost:8081/dms/medicineinfo/JSONQuery.action',
+    	        	'type':'post',
+    	        	'data':{
+    	        		'page.currentPage':pageIndex+1
+    	        	},
+    	        	'dataType':'json',
+    	        	'success':function(data){
+    	        		$('#tb-body').empty();
+    	        		for(var i = 0;i<data.length;i++){
+    	        			var row = '';
+        	        		row = row +'<tr>'; 
+    	        			row = row +'<td><a tid="'+data[i].id+'" class="uk-button uk-button-link" href="#modaldetail" data-uk-modal="{target:\'#modaldetail\'}">'+data[i].medicineName+'</a></td>';
+    	        			row = row +'<td>'+data[i].licenseNumber+'</td>';
+    	        			row = row +'<td>'+data[i].productionUnit+'</td>';
+    	        			row = row +'<td>'+data[i].drugStandardCode+'</td>';
+    	        			row = row +'<td>';
+    	        			row = row +'<a class="uk-button" href="/dms/medicineinfo/toEdit.action?vo.id='+data[i].id+'">修改</a>';
+    	        			row = row +'<a z-data="'+data[i].id+'" class="uk-button uk-button-danger del" href="#">删除</a>';
+    	        			row = row +'</td>';
+    	        			row = row +'</tr>';
+    	        			$('#tb-body').append(row);
+    	        		}
+
+    	        		$('a[tid]').on('click',function(){
+    	        			var s = $(this).attr('tid');
+    	        			window.iframedetail.location.href='medicineinfo/detail.action?vo.id='+s;
+    	        		});
+    	        		
+    	        		$('.del').click(function(){
+    	        			var s = $(this).attr('z-data');
+    	        			UIkit.modal.confirm("确定要删除吗?", function(){
+    	        			    window.location.href='/dms/medicineinfo/delete.action?vo.id='+s;
+    	        			});
+    	        		});
+    	        	}
+    	        });
     	    });
     		
     		$('.del').click(function(){
@@ -83,7 +119,7 @@
 					<th class="uk-text-center">操&nbsp;&nbsp;&nbsp;&nbsp;作</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="tb-body">
 				<c:forEach var="u" items="${query}">
 					<tr>
 							<td><a tid="${u.id}" class="uk-button uk-button-link" href="#modaldetail" data-uk-modal="{target:'#modaldetail'}">${u.medicineName }</a></td>

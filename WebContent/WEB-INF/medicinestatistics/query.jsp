@@ -37,7 +37,7 @@
 	</div>
 	<div id="pageBtn" class="uk-margin uk-text-center">
 		<form class="uk-form" action="/dms/medicinestatistics/query.action" method="post">
-			<input type="text" name="date" data-uk-datepicker="{format:'YYYY-MM-DD',maxDate:0}" placeholder="日期" />
+			<input type="text" name="date" data-uk-datepicker="{format:'YYYY-MM-DD',maxDate:0}" placeholder="日期" value="${dateStr }"/>
 			<button class="uk-button uk-button-primary">确定</button>
 		</form>
 	</div>

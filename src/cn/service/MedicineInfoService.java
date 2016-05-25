@@ -9,6 +9,8 @@ public interface MedicineInfoService extends BaseService{
 
 	public List<MedicineInfo> query(MedicineInfo vo,PageResult page);
 	
+	public String JSONQuery(MedicineInfo vo,PageResult page);
+	
 	public MedicineInfo queryById(MedicineInfo info);
 
 	public List<MedicineInfo> queryFuzzy(String search);

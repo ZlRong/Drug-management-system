@@ -1,9 +1,13 @@
 package cn.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -100,5 +104,18 @@ public class MedicineInfoAction extends ActionSupport {
 	public String ajaxQuery(){
 		list = service.query(vo,page);
 		return "ajaxquery";
+	}
+	
+	public void JSONQuery(){
+		String list = service.JSONQuery(vo, page);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");
+		try {
+			PrintWriter  out = response.getWriter();
+			out.write(list);
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

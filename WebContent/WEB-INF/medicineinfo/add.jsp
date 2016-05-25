@@ -5,10 +5,13 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>药品管理系统</title>
-	<link rel="stylesheet" href="../css/uikit.almost-flat.min.css" />
-    <script src="../js/jquery-2.0.0.min.js"></script>
-    <script src="../js/uikit.min.js"></script>
-    <script src="../js/components/pagination.min.js"></script>
+	<link rel="stylesheet" href="/dms/css/uikit.almost-flat.min.css" />
+	<link rel="stylesheet" type="text/css" href="/dms/css/components/datepicker.css"/>
+	<link rel="stylesheet" type="text/css" href="/dms/css/components/form-select.css"/>
+    <script src="/dms/js/jquery-2.0.0.min.js"></script>
+    <script src="/dms/js/uikit.min.js"></script>
+    <script src="/dms/js/components/datepicker.js"></script>
+    <script src="/dms/js/components/form-select.js"></script>
 </head>
 <body>
 	<div id="pageHead">
@@ -79,7 +82,7 @@
 					</div>
 					<div class="uk-width-1-3">
 							<label class="uk-form-label">批准日期</label>
-							<input type="date" placeholder="" name="vo.licenseDate" />
+							<input type="text" placeholder="" name="vo.licenseDate" data-uk-datepicker="{format:'YYYY-MM-DD',maxDate:0}" />
 					</div>
 					<div class="uk-width-1-3">
 						<label class="uk-form-label">药品本位码</label>

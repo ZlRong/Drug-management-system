@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 import cn.bean.MedicineInfo;
 import cn.dao.MedicineInfoDao;
 import cn.service.MedicineInfoService;
@@ -61,5 +64,22 @@ public class MedicineInfoServiceImpl implements MedicineInfoService {
 	@Override
 	public List<MedicineInfo> queryByDrugStandardCode(String drugStandardCode) {
 		return dao.queryByDrugStandardCode(drugStandardCode);
+	}
+
+	@Override
+	public String JSONQuery(MedicineInfo vo, PageResult page) {
+		List<MedicineInfo> list = dao.query(vo,page);
+		JSONArray ja = new JSONArray();
+		JSONObject jo = null;
+		for(MedicineInfo m : list){
+			jo = new JSONObject();
+			jo.put("id", m.getId());
+			jo.put("medicineName", m.getMedicineName());
+			jo.put("licenseNumber", m.getLicenseNumber());
+			jo.put("productionUnit", m.getProductionUnit());
+			jo.put("drugStandardCode", m.getDrugStandardCode());
+			ja.add(jo);
+		}
+		return ja.toJSONString();
 	}
 }
